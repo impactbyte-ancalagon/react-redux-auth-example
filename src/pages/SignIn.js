@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { signIn } from '../store/actions/auth'
+import { signIn, setSignUpStatus } from '../store/actions/auth'
 
 class SignIn extends Component {
   state = {
     email: '',
     password: ''
+  }
+
+  componentDidMount() {
+    if (this.props.isSignUpSuccess) {
+      this.props.setSignUpStatus(false)
+    }
   }
 
   handleChange = e => {
@@ -50,10 +56,11 @@ class SignIn extends Component {
 }
 
 const mapStateToProps = store => ({
+  isSignUpSuccess: store.auth.isSignUpSuccess,
   isAuthenticated: store.auth.isAuthenticated
 })
 
 export default connect(
   mapStateToProps,
-  { signIn }
+  { signIn, setSignUpStatus }
 )(SignIn)

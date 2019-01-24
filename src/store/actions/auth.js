@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN } from '../types'
+import { SIGN_UP, SIGN_IN, SIGN_OUT } from '../types'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -25,4 +25,12 @@ export const signIn = data => dispatch => {
     .catch(err => {
       console.error(err)
     })
+}
+
+export const signOut = () => dispatch => {
+  Cookies.remove('token')
+
+  dispatch({
+    type: SIGN_OUT
+  })
 }

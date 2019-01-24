@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { fetchUsers } from '../store/actions/users'
+import { signOut } from '../store/actions/auth'
 import { Redirect } from 'react-router-dom'
 
 class UserList extends Component {
@@ -9,13 +10,16 @@ class UserList extends Component {
   }
 
   render() {
-    const { users, isAuthenticated } = this.props
+    const { users, isAuthenticated, signOut } = this.props
 
     if (!isAuthenticated) {
       return <Redirect to={{ pathname: '/signin' }} />
     }
     return (
-      <ul>{users && users.map((user, i) => <li key={i}>{user.name}</li>)}</ul>
+      <Fragment>
+        <ul>{users && users.map((user, i) => <li key={i}>{user.name}</li>)}</ul>
+        <button onClick={signOut}>Sign Out</button>
+      </Fragment>
     )
   }
 }
@@ -27,5 +31,5 @@ const mapStateToProps = store => ({
 
 export default connect(
   mapStateToProps,
-  { fetchUsers }
+  { fetchUsers, signOut }
 )(UserList)

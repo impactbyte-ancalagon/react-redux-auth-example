@@ -13,8 +13,9 @@ class UserList extends Component {
     const { users, isAuthenticated, signOut } = this.props
 
     if (!isAuthenticated) {
-      return <Redirect to={{ pathname: '/signin' }} />
+      return <Redirect to="/signin" />
     }
+
     return (
       <Fragment>
         <ul>{users && users.map((user, i) => <li key={i}>{user.name}</li>)}</ul>

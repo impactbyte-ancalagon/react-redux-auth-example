@@ -4,12 +4,13 @@ import Cookies from 'js-cookie'
 
 export const signUp = data => dispatch => {
   Axios.post('http://localhost:8000/api/auth/signup', data)
-    .then(({ data }) => {
-      if (data === 'Success') {
+    .then(response => {
+      if (response.status === 200) {
         dispatch(setSignUpStatus(true))
       }
     })
     .catch(err => {
+      console.error(err)
       dispatch(setSignUpStatus(false))
     })
 }
@@ -21,9 +22,9 @@ export const setSignUpStatus = value => ({
 
 export const signIn = data => dispatch => {
   Axios.post('http://localhost:8000/api/auth/signin', data)
-    .then(({ data }) => {
-      if (data.token) {
-        Cookies.set('token', data.token, { expires: 7 })
+    .then(response => {
+      if (response.status === 200) {
+        Cookies.set('token', response.data.token, { expires: 7 })
         dispatch({ type: SIGN_IN })
       }
     })

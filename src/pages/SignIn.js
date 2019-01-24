@@ -30,7 +30,7 @@ class SignIn extends Component {
     const { isAuthenticated } = this.props
 
     if (isAuthenticated) {
-      return <Redirect to={{ pathname: '/users' }} />
+      return <Redirect to="/users" />
     }
 
     return (

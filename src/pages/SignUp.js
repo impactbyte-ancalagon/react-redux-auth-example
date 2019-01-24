@@ -19,9 +19,7 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault()
 
-    const { name, age, email, password } = this.state
-
-    this.props.signUp({ name, age, email, password })
+    this.props.signUp(this.state)
   }
 
   render() {
@@ -29,11 +27,11 @@ class SignUp extends Component {
     const { isAuthenticated, isSignUpSuccess } = this.props
 
     if (isAuthenticated) {
-      return <Redirect to={{ pathname: '/users' }} />
+      return <Redirect to="/users" />
     }
 
     if (isSignUpSuccess) {
-      return <Redirect to={{ pathname: '/signin' }} />
+      return <Redirect to="/signin" />
     }
 
     return (

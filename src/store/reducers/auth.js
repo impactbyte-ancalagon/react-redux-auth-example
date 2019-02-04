@@ -8,11 +8,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_SIGN_UP_STATUS:
-      return { isSignUpSuccess: action.payload }
+      return { ...state, isSignUpSuccess: action.payload }
     case SIGN_IN:
-      return { isAuthenticated: true }
+      return { ...state, isAuthenticated: true }
     case SIGN_OUT:
-      return { isAuthenticated: false }
+      return { ...state, isAuthenticated: false }
     default:
       return state
   }

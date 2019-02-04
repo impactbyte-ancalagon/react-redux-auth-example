@@ -25,13 +25,17 @@ export const signIn = data => dispatch => {
     .then(response => {
       if (response.status === 200) {
         Cookies.set('token', response.data.token, { expires: 7 })
-        dispatch({ type: SIGN_IN })
+        dispatch(signInAction())
       }
     })
     .catch(err => {
       console.error(err)
     })
 }
+
+export const signInAction = () => ({
+  type: SIGN_IN
+})
 
 export const signOut = () => dispatch => {
   Cookies.remove('token')
